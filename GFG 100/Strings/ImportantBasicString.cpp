@@ -11,7 +11,7 @@ using namespace std;
 //Q4 Unique charaters present?
 
 //Q5 Longest Unique character substring
-//->Follow Up it minimum window substring
+//->Follow Up it minimum window substring-using sliding window
 
 //Q6 Check String Rotation
 

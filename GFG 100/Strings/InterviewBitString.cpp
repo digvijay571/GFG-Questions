@@ -1,6 +1,6 @@
 //Q. find no. of substrings that contain first vowels and last consonants
 //idea is to maintain sum to count all substring
-//maintain vowels and consonants count before a character 
+//maintain vowels and consonants count before a character
 
 //if a character is vowel then add consonats number to sum and vowel++
 
@@ -8,21 +8,21 @@
 
 //to get the required substrings
 
-
-
 //Q. find no. substrings which have same first and last character
 
 //this can  be done in linear time by calculating frequency of each character
 //then iterating through frequency map and keep on adding while
-// applying formula fmp[i]*(fmp[i]+1)/2
+// applying formula fmp[i]*(fmp[i]+1)/2-as one substring is also to be considered so -> n+1C2
 
-// For example in string abcab, frequency of ‘a’ is 2, 
-// and substrings contributing to answering are a, abca and a respectively, 
-// a total of 3, which is calculated by (frequency of ‘a’+1)C2. 
+// For example in string abcab, frequency of ‘a’ is 2,
+// and substrings contributing to answering are a, abca and a respectively,
+// a total of 3, which is calculated by (frequency of ‘a’+1)C2.
 
+//Count Good Pairs
+// https://leetcode.com/problems/number-of-good-pairs/ ->same concept but pair we have to find so nC2
 
 //Q. Count Total Vowels in a all substring
-//to find all 
+//to find all
 void CountVowels(string &s)
 {
     int count = 0;
@@ -45,63 +45,54 @@ void CountVowels(string &s)
 
             count += 1LL * (n - i) * i; //i are the number of charaters which are before current charater
                                         //and n-i are the substring which can be made containing current vowel
-                                        //1LL is to avoid overflow of n-i*i 
+                                        //1LL is to avoid overflow of n-i*i
         }
     }
 }
 
-
-
-
 //Q. find substring with all vowels
 
-       
 // For every character,
-//  If current character is vowel then insert into hash. 
-//  Else set flag Start to next substring start from i+1th index. 
-//  If all vowels are included, we print the current substring. 
+//  If current character is vowel then insert into hash.
+//  Else set flag Start to next substring start from i+1th index.
+//  If all vowels are included, we print the current substring.
 
-
-
- 
 // Returns true if x is vowel.
 bool isVowel(char x)
 {
     // Function to check whether a character is
     // vowel or not
     return (x == 'a' || x == 'e' || x == 'i' ||
-                        x == 'o' || x == 'u');
+            x == 'o' || x == 'u');
 }
- 
+
 // Function to FindSubstrings of string
 void FindSubstring(string str)
 {
-    set<char> hash;  // To store vowels
- 
+    set<char> hash; // To store vowels
+
     int start = 0;
-    for (int i=0; i<str.length(); i++)
+    for (int i = 0; i < str.length(); i++)
     {
         // If current character is vowel then
         // insert into hash ,
         if (isVowel(str[i]) == true)
         {
             hash.insert(str[i]);
- 
+
             // If all vowels are present in current
             // substring
-            if (hash.size()==5)
-                cout << str.substr(start, i-start+1)
+            if (hash.size() == 5)
+                cout << str.substr(start, i - start + 1)
                      << " ";
         }
         else
         {
-            start = i+1;
+            start = i + 1;
             hash.clear();
         }
     }
 }
-
-
 
 //Great Questions to get idea of integer valid
 
@@ -140,7 +131,6 @@ void FindSubstring(string str)
 // How about integers preceded by 00 or 0? like 008?
 
 // Yes for this problem
-
 
 // Questions:
 

@@ -308,7 +308,7 @@ long long int mod = 1e9 + 7;
 int Count(int n, int i, int j, vector<vector<vector<int>>> &dp)
 {
 
-    //mistake happend was - i wrote success first and  faliure after which is wrong
+    //mistake happend was -> i wrote success first and  faliure after which is wrong
 
     //failure
     if ((i == 3 && j == 0) || (i == 3 && j == 2) || i < 0 || j < 0 || i >= 4 || j >= 3)
@@ -602,4 +602,135 @@ int minimumRemovals(vector<int> &arr, int n, int k)
 
     vector<vector<int>> dp(n, vector<int>(n, -1));
     return minRem(0, n - 1, arr, k, dp);
+}
+
+//KANDANE
+
+class Solution
+{
+public:
+    int maxSubArray(vector<int> &nums)
+    {
+
+        int currSum = nums[0];
+        int maxSum = nums[0];
+
+        if (currSum < 0)
+            currSum = 0;
+
+        for (int i = 1; i < nums.size(); i++)
+        {
+            currSum += nums[i];
+
+            maxSum = max(maxSum, currSum);
+
+            if (currSum < 0)
+                currSum = 0;
+        }
+        return maxSum;
+    }
+};
+
+//KANDANE-VARIATION
+// maximum-difference-of-zeros-and-ones-in-a-binary-string
+//https://www.codingninjas.com/codestudio/problems/maximum-difference-of-zeros-and-ones-in-a-binary-string_1203919?topList=top-dynamic-programming-questions&leftPanelTab=1
+
+//Brute force
+int maximumDifference(string &str)
+{
+    int ans = -1;
+
+    for (int i = 0; i < str.size(); i++) //for selecting start
+    {
+        int onecount = 0;
+        int zerocount = 0;
+        for (int j = i; j < str.size(); j++) //for selecting end
+        {
+            if (str[j] == '0') //using ending character to calculate zero and one count using prev counts
+                zerocount++;
+            else
+                onecount++;
+
+            int diff = zerocount - onecount;
+            ans = max(ans, diff);
+        }
+    }
+
+    return ans;
+}
+int maximumDifference(string &str)
+{
+    //	   Similar to KANDANE
+    //     every ‘0’ will contribute 1 and
+    //     every ‘1’ will contribute -1 to the answer in any substring.
+
+    int curr0 = str[0] == '0' ? 1 : -1;
+    int max0 = curr0;
+
+    if (curr0 < 0)
+        curr0 = 0;
+
+    for (int i = 1; i < str.size(); i++)
+    {
+        if (str[i] == '0')
+        {
+            curr0 += 1;
+        }
+        else
+        {
+            curr0 -= 1;
+        }
+
+        max0 = max(max0, curr0);
+
+        if (curr0 < 0)
+            curr0 = 0;
+    }
+
+    return max0;
+}
+
+
+//1:{0,3,5}
+//-1
+//2
+//-1
+//
+//1     //1   //1
+//1,-2,3,-1,4,-4
+
+//Knapsack-count
+// https://www.codingninjas.com/codestudio/problems/number-of-ways_1062651?topList=top-dynamic-programming-questions
+//As target is given so problem is of Knapsack
+
+int count(int n, int target, vector<int> &coins, vector<vector<int>> &dp)
+{
+
+    //as we want exact target so this is success check
+    if (target == 0)
+        return 1;
+
+    //if no elements left and target is not zero reuturn 0
+    //if it was at most target then we would have reuturned 1 and do not include above check
+    if (n == 0)
+        return 0;
+
+    if (dp[n][target] != -1)
+        return dp[n][target];
+
+    int take = 0;
+
+    if (target >= coins[n - 1])                            //boundary check
+        take = count(n, target - coins[n - 1], coins, dp); //take
+
+    int not_take = count(n - 1, target, coins, dp); //not-take
+
+    return dp[n][target] = take + not_take;
+}
+
+int countWays(int n)
+{
+    vector<int> coins = {3, 5, 10};
+    vector<vector<int>> dp(4, vector<int>(n + 1, -1));
+    return count(3, n, coins, dp);
 }
