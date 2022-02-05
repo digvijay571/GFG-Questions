@@ -1,46 +1,52 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
-int main()
-{
-    int n=4;
-    vector<int> a = {0,1,2,3};
-	int b[n][32];
-    int r, c = 0;
-    for(int i=0;i<n;i++)
+void reverseRows(vector<vector<int>> &mat)
     {
-        for(int j=31;j>=0;j--)
+        for(int i=0;i<mat.size();i++)
         {
-            int x = a[i];
-            int bit = (x >> j)&1;
-            b[i][31-j] = bit; 
+            reverse(mat[i].begin(),mat[i].end());
+        }
+    }
+    
+void reverseCols(vector<vector<int>> &mat)
+    {
+        for(int i=0;i<mat[0].size();i++)
+        {
+            int j=0;
+            int k=mat.size()-1;
+            
+            while(j<k)
+            {
+            //  int temp = mat[j][i];
+            //  mat[j][i] = mat[k][i];
+            //  mat[k][i]=temp;
+            
+                swap(mat[j++][i],mat[k--][i]);
+            }
         }
     }
 
-   for(int i=0;i<31;i++)
-   {
-       for(int j=0;j<n-1;j++)
-       {
-           if(b[j][i] != b[j+1][i])
-             {
-                 //cout<<b[j][i]<<endl<<b[j+1][i];
-                 r = j;
-                 c = 1;
-                 break; 
-             }
-       }
-       if(c == 1)
-           break;
-   }
-   //cout<<endl<<r<<endl<<c;
-   int ans = INT_MAX;
-   for(int i=0;i<=r;i++)
-   {
-       for(int j=r+1;j<n;j++)
-       {
-           ans = min(ans, (a[i] ^ a[j]));
-       }
-   }
-   cout<<ans;
+int main()
+{
+
+    vector<vector<int>> mat = 
+    {
+      
+    {1,  2,  3},
+    {5,  6,  7},
+    {9,  10, 11},
+
+    };   
+        reverseRows(mat);
+        reverseCols(mat);
+
+        for(auto r:mat)
+        {
+            for(auto c:r)
+            {
+                cout<<c<<" ";
+            }
+            cout<<endl;
+        }
 }

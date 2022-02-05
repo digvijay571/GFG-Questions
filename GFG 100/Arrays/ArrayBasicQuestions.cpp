@@ -37,8 +37,8 @@ int secondLargest(int arr[], int n)
 	{
 		if (arr[i] > largest)
 		{
-			largest = arr[i];
-			secondLargest = largest;
+			secondLargest = largest;//IMP : first this -> whenver u are putting one var value to another make sure it is not begin changed
+			largest = arr[i];	
 		}
 		else if (arr[i] > secondLargest)
 		{
