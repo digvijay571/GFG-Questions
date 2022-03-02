@@ -1,11 +1,11 @@
 
-//Longest Repeating Subsequence
-//SUBSEQUENCE:
-//Two strings
-//same or not same charaters at i and j
-//if same then take i+1,j+1
-//if not same then move (i ->i+1) and stay j->j  or
-//stay i -> i and move j -> j+1
+// Longest Repeating Subsequence
+// SUBSEQUENCE:
+// Two strings
+// same or not same charaters at i and j
+// if same then take i+1,j+1
+// if not same then move (i ->i+1) and stay j->j  or
+// stay i -> i and move j -> j+1
 
 int lcs(int n1, int n2, string &st, vector<vector<int>> &dp)
 {
@@ -28,9 +28,9 @@ int longestRepeatingSubsequence(string st, int n)
     return lcs(n, n, st, dp);
 }
 
-//Maximum subarray product
-// An array c is a subarray of array d if c can be obtained from d by deletion of
-//  several elements from the beginning and several elements from the end. or a contiguous section of a array
+// Maximum subarray product
+//  An array c is a subarray of array d if c can be obtained from d by deletion of
+//   several elements from the beginning and several elements from the end. or a contiguous section of a array
 
 // Subproblem for the DP here would be:
 // What is the maximum and minimum product we can get for a contiguous
@@ -46,8 +46,8 @@ int maximumProduct(vector<int> &arr, int n)
     int minproduct = arr[0];
     int res = arr[0];
 
-    //maxproduct and minproduct are maximum and minimum product from all subarrays ending at that index
-    //not the maxproduct and minproduct untill that index
+    // maxproduct and minproduct are maximum and minimum product from all subarrays ending at that index
+    // not the maxproduct and minproduct untill that index
     for (int i = 1; i < n; i++)
     {
 
@@ -62,36 +62,36 @@ int maximumProduct(vector<int> &arr, int n)
     return res;
 }
 
-//Ninja At Jym-similar to LIS
+// Ninja At Jym-similar to LIS
 
 int maxIncreasingDumbbellsSum(vector<int> &rack, int n)
 {
-    //dp[i] denotes maximumORLargestIncresingSubsequenceSumEndingAti
+    // dp[i] denotes maximumORLargestIncresingSubsequenceSumEndingAti
     vector<int> dp(n, 0);
 
-    int ans = rack[0]; //for calculating the maximum sum
+    int ans = rack[0]; // for calculating the maximum sum
 
     dp[0] = rack[0];
-    for (int i = 1; i < n; i++) //one loop is for calculating dp[i]
+    for (int i = 1; i < n; i++) // one loop is for calculating dp[i]
     {
-        dp[i] = rack[i];            //dp[i]=1;initialization as
-        for (int j = 0; j < i; j++) //calculating current problem dp[i]
-                                    //using subproblem dp[j]:dp[0]...dp[i-1]
+        dp[i] = rack[i];            // dp[i]=1;initialization as
+        for (int j = 0; j < i; j++) // calculating current problem dp[i]
+                                    // using subproblem dp[j]:dp[0]...dp[i-1]
         {
-            if (rack[i] > rack[j]) //can current element rack[i] can be attached
-                //after the subsequnce ending at j
-                //as the subsequece is increasing so
-                //rack[i]>rack[j]
+            if (rack[i] > rack[j]) // can current element rack[i] can be attached
+                                   // after the subsequnce ending at j
+                                   // as the subsequece is increasing so
+                                   // rack[i]>rack[j]
             {
                 dp[i] = max(dp[i], rack[i] + dp[j]);
             }
         }
-        ans = max(ans, dp[i]); //maximizing ans
+        ans = max(ans, dp[i]); // maximizing ans
     }
     return ans;
 }
 // Count Subarrays Having Product Less Than K
-//Variable Sliding Windows
+// Variable Sliding Windows
 int countSubarrays(vector<int> &arr, int k)
 {
     int n = arr.size(), start = 0, end = 0, counter = 0;
@@ -129,7 +129,7 @@ int countSubarrays(vector<int> &arr, int k)
 }
 
 // Total Strings
-//Stock based choices
+// Stock based choices
 const int MOD = 1000000007;
 
 int count(int n, int b, int c, vector<vector<vector<int>>> &dp)
@@ -137,18 +137,18 @@ int count(int n, int b, int c, vector<vector<vector<int>>> &dp)
 
     if (n == 0)
         return 1;
-    //take b
+    // take b
     if (dp[n][b][c] != -1)
         return dp[n][b][c];
     int take_b = 0, take_c = 0;
 
-    if (b > 0) //if there is stock of b
+    if (b >= 1) // if there is stock of b
         take_b = count(n - 1, b - 1, c, dp) % MOD;
-    //take c
-    if (c > 0) //if there is stock of c
+    // take c
+    if (c >= 1) // if there is stock of c
         take_c = count(n - 1, b, c - 1, dp) % MOD;
 
-    //take a
+    // take a
     int take_a = count(n - 1, b, c, dp) % MOD;
 
     return dp[n][b][c] = (take_a + take_b + take_c) % MOD;
@@ -161,26 +161,26 @@ int countStrings(int n)
     // Write your code here.
 }
 
-//Longest Valid Parentheses -Using Stack
-// The stack will tell us if the string scanned so far is valid or not.
-// if the stack is empty, push the current index in it.
-//  Otherwise, we have found a valid substring.
-//  Find its length by subtracting the current index from the top element.
-// pushing the indices, instead of characters, we can also determine the length of the longest valid substring.
+// Longest Valid Parentheses -Using Stack
+//  The stack will tell us if the string scanned so far is valid or not.
+//  if the stack is empty, push the current index in it.
+//   Otherwise, we have found a valid substring.
+//   Find its length by subtracting the current index from the top element.
+//  pushing the indices, instead of characters, we can also determine the length of the longest valid substring.
 
-//When we find open bracker
+// When we find open bracker
 
-//Basically i am calculating at every index what is the maximum lenth of valid parentheses can be fromed ending at that index
-//if open then push
-//if close then pop and
-//if the stack is empty then we cannot form any valid substring ending at that index,so push that index as a marker for next lenght
-//if stack is not empty then we can calculte lenght using top of stack
+// Basically i am calculating at every index what is the maximum lenth of valid parentheses can be fromed ending at that index
+// if open then push
+// if close then pop and
+// if the stack is empty then we cannot form any valid substring ending at that index,so push that index as a marker for next lenght
+// if stack is not empty then we can calculte lenght using top of stack
 int longestValidParentheses(string s)
 {
     int ans = 0;
 
     stack<int> stk;
-    stk.push(-1); //index stack to find len
+    stk.push(-1); // index stack to find len
 
     for (int i = 0; i < s.length(); i++)
     {
@@ -191,7 +191,7 @@ int longestValidParentheses(string s)
         }
         else
         {
-            stk.pop(); //THIS IS KEY STEP
+            stk.pop(); // THIS IS KEY STEP
             if (stk.empty())
             {
                 // Push the current index.
@@ -211,7 +211,7 @@ int longestValidParentheses(string s)
     return ans;
 }
 
-//Using open and close counter
+// Using open and close counter
 int longestValidParentheses(string s)
 {
     // Write your code here.
@@ -257,14 +257,14 @@ int longestValidParentheses(string s)
     return maxLen;
 }
 
-//2keys keyboard and 4 keys keyboard
+// 2keys keyboard and 4 keys keyboard
 
-//2keys Keyboard
-// https://leetcode.com/problems/2-keys-keyboard/
+// 2keys Keyboard
+//  https://leetcode.com/problems/2-keys-keyboard/
 
-//Basically we have two choices :
-//either use prev buffer
-//or copy current entire string and paste it
+// Basically we have two choices :
+// either use prev buffer
+// or copy current entire string and paste it
 long long int minSteps(int count, int bufferA, int total, vector<vector<long long int>> &dp)
 {
 
@@ -282,7 +282,7 @@ long long int minSteps(int count, int bufferA, int total, vector<vector<long lon
 
     long long int paste = INT_MAX;
 
-    //using prev buffer
+    // using prev buffer
     if (bufferA > 0)
         paste = 1 + minSteps(count + bufferA, bufferA, total, dp);
 
@@ -299,31 +299,31 @@ public:
     }
 };
 
-//Keypad count-Mike and mobile
-// https://www.codingninjas.com/codestudio/problems/mike-and-mobile_1082139?topList=top-dynamic-programming-questions&leftPanelTab=2
-//Using count method -dfs
+// Keypad count-Mike and mobile
+//  https://www.codingninjas.com/codestudio/problems/mike-and-mobile_1082139?topList=top-dynamic-programming-questions&leftPanelTab=2
+// Using count method -dfs
 
 long long int mod = 1e9 + 7;
 
 int Count(int n, int i, int j, vector<vector<vector<int>>> &dp)
 {
 
-    //mistake happend was - i wrote success first and  faliure after which is wrong
+    // mistake happend was - i wrote success first and  faliure after which is wrong
 
-    //failure
+    // failure
     if ((i == 3 && j == 0) || (i == 3 && j == 2) || i < 0 || j < 0 || i >= 4 || j >= 3)
         return 0;
 
-    //success
+    // success
     if (n == 0)
         return 1;
 
     if (dp[n][i][j] != -1)
         return dp[n][i][j];
 
-    //same
+    // same
     return dp[n][i][j] = (Count(n - 1, i, j, dp) % mod +     // same key
-                          Count(n - 1, i + 1, j, dp) % mod + //adjacents//
+                          Count(n - 1, i + 1, j, dp) % mod + // adjacents//
                           Count(n - 1, i, j + 1, dp) % mod +
                           Count(n - 1, i - 1, j, dp) % mod +
                           Count(n - 1, i, j - 1, dp) % mod) %
@@ -338,7 +338,7 @@ int generateNumbers(int n)
     {
         for (int j = 0; j < 3; j++)
         {
-            count += Count(n - 1, i, j, dp); //IMP: n-1 because i have included that one pressed one key here
+            count += Count(n - 1, i, j, dp); // IMP: n-1 because i have included that one pressed one key here
             count = count % mod;
         }
     }
@@ -346,7 +346,7 @@ int generateNumbers(int n)
     return count % mod;
 }
 
-//Using valid state concept - Always going to valid state - BEST
+// Using valid state concept - Always going to valid state - BEST
 
 const int mod = 1000000007;
 
@@ -414,18 +414,18 @@ int generateNumbers(int n)
     return ans;
 }
 
-//Unbounded Knapsack
+// Unbounded Knapsack
 
 int uknapsack(int n, int c, vector<int> &profit, vector<int> &weight, vector<vector<int>> &dp)
 {
-    //if no items left and capacity can be zero or greater then zero
+    // if no items left and capacity can be zero or greater then zero
     if (n == 0)
         return 0;
 
     if (dp[n][c] != -1)
         return dp[n][c];
 
-    //if current weight is
+    // if current weight is
     if (weight[n - 1] > c)
         return dp[n][c] = uknapsack(n - 1, c, profit, weight, dp);
 
@@ -444,13 +444,13 @@ int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight)
 
 // Ninja the Exam Instructor
 // https://www.codingninjas.com/codestudio/problems/ninja-the-exam-instructor_1215010?topList=top-dynamic-programming-questions&leftPanelTab=1
-//Tree Sitting
+// Tree Sitting
 
 #include <bits/stdc++.h>
 
-//key idea is to maintain canSit
+// key idea is to maintain canSit
 
-map<pair<Examcentre<int> *, int>, int> dp; //Using map : IMP
+map<pair<Examcentre<int> *, int>, int> dp; // Using map : IMP
 
 int count(Examcentre<int> *root, int canSit)
 {
@@ -473,12 +473,12 @@ int examInstructor(Examcentre<int> *root)
     return count(root, 1);
 }
 
-//Choose Students
-// https://www.codingninjas.com/codestudio/problems/choose-students_1062724?topList=top-dynamic-programming-questions&leftPanelTab=0
+// Choose Students
+//  https://www.codingninjas.com/codestudio/problems/choose-students_1062724?topList=top-dynamic-programming-questions&leftPanelTab=0
 
-//nCr = n-1Cr+n-1Cr-1; //recurrence
-//Base conditions if(n<r) return 0;
-//     if(n==r || r==0) return 1;
+// nCr = n-1Cr+n-1Cr-1; //recurrence
+// Base conditions if(n<r) return 0;
+//      if(n==r || r==0) return 1;
 int nCr(int n, int r, vector<vector<int>> &dp)
 {
     if (n < r)
@@ -502,33 +502,33 @@ int choose(int n, int r)
 
 int minimumJumps(vector<int> &arr, int n)
 {
-    //Idea is to use greedy:
-    //Maintain three vars
-    //maxReach -maximum reach from all prev steps
-    //currReach-Reach in current jump
-    //jump-to calculate jumps
+    // Idea is to use greedy:
+    // Maintain three vars
+    // maxReach -maximum reach from all prev steps
+    // currReach-Reach in current jump
+    // jump-to calculate jumps
 
-    //Base case :IMP
+    // Base case :IMP
     if (n == 1)
         return 0;
 
-    //Initalize variables
+    // Initalize variables
     int maxReach = arr[0];
     int jumps = 1;
     int currReach = arr[0];
 
     for (int step = 1; step < n; step++)
     {
-        //check for valid step:validation check
+        // check for valid step:validation check
         if (step > maxReach)
             return -1;
-        //reached end
+        // reached end
         if (step >= n - 1)
             return jumps;
-        //maximizing maxReach
+        // maximizing maxReach
         maxReach = max(maxReach, step + arr[step]);
 
-        if (step == currReach) //we have to take a jump if step==currReach
+        if (step == currReach) // we have to take a jump if step==currReach
         {
             currReach = maxReach;
             jumps++;
@@ -536,7 +536,7 @@ int minimumJumps(vector<int> &arr, int n)
     }
 }
 
-//Minimum Removals
+// Minimum Removals
 
 // The key observation here is that the best way to remove an element from the array is to remove the maximum or minimum element from the array. There are two possible ways of removal, either we remove the minimum element or the maximum element.
 
@@ -552,7 +552,7 @@ int minimumJumps(vector<int> &arr, int n)
 // Return 0.
 // Finally, we do a recursive call for (i + 1, j) and (i, j - 1) and 1 + minimum of them will be our answer.
 
-//My bruteforce
+// My bruteforce
 
 #include <bits/stdc++.h>
 int minimumRemovals(vector<int> &arr, int n, int k)
@@ -561,9 +561,9 @@ int minimumRemovals(vector<int> &arr, int n, int k)
     sort(arr.begin(), arr.end());
 
     int ans = INT_MAX;
-    for (int i = 0; i < n; i++) //start loop
+    for (int i = 0; i < n; i++) // start loop
     {
-        for (int j = 0; j < n; j++) //end loop
+        for (int j = 0; j < n; j++) // end loop
         {
             if (arr[j] - arr[i] <= k)
             {
@@ -574,16 +574,16 @@ int minimumRemovals(vector<int> &arr, int n, int k)
     return ans;
 }
 
-//Memoized
+// Memoized
 
 #include <bits/stdc++.h>
 int minRem(int i, int j, vector<int> &arr, int k, vector<vector<int>> &dp)
 {
-    //if single element left then
+    // if single element left then
     if (i >= j)
         return 0;
 
-    //if diff of min and max element is less than or equals to k
+    // if diff of min and max element is less than or equals to k
 
     if (arr[j] - arr[i] <= k)
         return 0;
@@ -604,38 +604,40 @@ int minimumRemovals(vector<int> &arr, int n, int k)
     return minRem(0, n - 1, arr, k, dp);
 }
 
+// Combinations(count)
 
-//Combinations or  ubknapsack
+// As target is given so problem is of Knapsack
 
-
-//As target is given so problem is of Knapsack
-
-int count(int n,int target,vector<int>& coins,vector<vector<int>>& dp)
+int count(int n, int target, vector<int> &coins, vector<vector<int>> &dp)
 {
-   
-   //as we have to find equal to target so target ==0 is going to be first condition i.e target is made return 1 combination
-    //if it was capacity then we do not care about this-until target
 
-    if(target==0) return 1;
+    // as we have to find equal to target so target ==0 is going to be first condition i.e target is made return 1 combination
+    // if it was capacity then we do not care about this-until target
 
-    //base case if no elements left and target is not zero then return 0 
-    if(n==0) return 0;
-    
-    if(dp[n][target] !=-1) return dp[n][target];
-    
+    if (target == 0)
+        return 1;
+
+    // base case if no elements left and target is not zero then return 0
+    if (n == 0)
+        return 0;
+
+    if (dp[n][target] != -1)
+        return dp[n][target];
+
     int take = 0;
-    //boundary check
-    if(target>=coins[n-1])
-    take=count(n,target-coins[n-1],coins,dp);
-    
-    int not_take = count(n-1,target,coins,dp);
-    
-    //count=choice1+choice2
-    return dp[n][target]=take+not_take;
+    // boundary check
+    if (target >= coins[n - 1])
+        take = count(n, target - coins[n - 1], coins, dp);
+
+    int not_take = count(n - 1, target, coins, dp);
+
+    // count=choice1+choice2
+    return dp[n][target] = take + not_take;
 }
 
-int countWays(int n){
-    vector<int> coins = {3,5,10};
-    vector<vector<int>> dp(4,vector<int>(n+1,-1));
-    return count(3,n,coins,dp);
+int countWays(int n)
+{
+    vector<int> coins = {3, 5, 10};
+    vector<vector<int>> dp(4, vector<int>(n + 1, -1));
+    return count(3, n, coins, dp);
 }

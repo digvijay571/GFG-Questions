@@ -1,0 +1,3 @@
+// https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/discuss/927654/C%2B%2BJavaPython3-Simple-time-O(n)-space-O(1)-a-small-array-is-all-you-need
+// https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/discuss/1453366/Java-O(N)-similar-to-1665
+// After step 1, the problem becomes similar to this one: https://leetcode.com/problems/minimum-increment-to-make-array-unique/

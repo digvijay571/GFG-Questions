@@ -5,7 +5,10 @@ using namespace std;
 
 int main()
 {	
-	//Arrays
+	//Arrays-Arrays are Homogenous contiguous collection of data,data can be accessed using index(for a n size array index is from 0 to n-1 (positive))
+	//Picture-> [1,8,3,6]
+	            |  | |  |
+		        0  1 2  3
 
 	//An array data structure is used to store muliple items at one place with one name
 
