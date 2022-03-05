@@ -132,6 +132,45 @@ int jump(int end)
     return count;
 }
 
+// Type 2 // JUMP Continue from end:
+
+// https://leetcode.com/problems/count-all-possible-routes/
+
+int m = 1e9 + 7;
+
+// If i can continue jumping from the end  then what to do?
+//  int res=0;
+//  if(si==ei)  res=1;
+
+class Solution
+{
+public:
+    int endcounter = 0;
+    int count(int si, int fuel, int ei, vector<int> &locations, vector<vector<int>> &dp)
+    {
+        int res = 0;
+        if (si == ei)
+            res = 1;
+
+        if (dp[si][fuel] != -1)
+            return dp[si][fuel];
+        for (int i = 0; i < locations.size(); i++)
+        {
+            if (i != si && fuel - abs(locations[si] - locations[i]) >= 0) // condition for valid jump
+                res = (res % m + count(i, fuel - abs(locations[si] - locations[i]), ei, locations, dp) % m) % m;
+        }
+        return dp[si][fuel] = res;
+    }
+
+    int countRoutes(vector<int> &locations, int start, int finish, int fuel)
+    {
+        vector<vector<int>> dp(locations.size(), vector<int>(fuel + 1, -1));
+        return count(start, fuel, finish, locations, dp);
+    }
+};
+
+// Type 3: JUMP+BINARYSEARCH
+
 // Frog jump
 
 // GIveaway from error: we cannot make Dp table for large values e.g INT_MAX if given and we are using as one of variables to memoize
@@ -165,3 +204,7 @@ int jump(int end)
 
 // DP: wasabistudio
 // STATES AND RELATIONS IN DP (aka nodes and edges in graph)
+
+// Similar
+
+// https://leetcode.com/problems/minimum-cost-for-tickets/discuss/1798231/DP%2BBinary-Search-solution-with-explanation

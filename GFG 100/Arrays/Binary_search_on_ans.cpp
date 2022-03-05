@@ -1,7 +1,65 @@
-https : // leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/discuss/777019/Python-Clear-explanation-Powerful-Ultimate-Binary-Search-Template.-Solved-many-problems.
+// https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/discuss/777019/Python-Clear-explanation-Powerful-Ultimate-Binary-Search-Template.-Solved-many-problems.
 
-        https : // leetcode.com/problems/minimum-time-to-complete-trips/
-                class Solution
+
+
+
+//Sqrt(X)
+
+class Solution {
+public:
+    
+    bool f(int mid,int val)//can be  the sqare root
+    {
+        return mid<=val/mid;
+    }
+    
+    int mySqrt(int x) {
+        int l=0;
+        int h=x;
+        
+        //binary seach on squareroot ans
+        while(l<h)
+        {
+            int mid=h-(h-l)/2;
+            if(f(mid,x))//TTTFFF 
+                        //ans is out last true
+            {
+                l=mid;
+            }
+            else
+            {
+                h=mid-1;
+            }
+        }
+        
+        return l;
+    }
+};
+
+
+
+
+
+//Split Array
+//Ship D pakages
+
+
+//Koko eating banana
+
+
+//Agressive COws
+
+
+
+
+
+
+
+
+
+
+// https://leetcode.com/problems/minimum-time-to-complete-trips/
+class Solution
 {
 public:
     // let say function f(t) return true if it's possible to complete totalTrips in t time and false
@@ -47,3 +105,11 @@ public:
         return r;
     }
 };
+
+
+//  Find the Smallest Divisor Given a Threshold
+
+
+
+
+

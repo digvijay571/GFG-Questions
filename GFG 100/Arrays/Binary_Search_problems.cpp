@@ -47,3 +47,46 @@
 //  Find in Mountain Array
 //  Count smaller number after Self
 //  Divide Chocolate Problem
+
+// Basic
+// https://leetcode.com/problems/peak-index-in-a-mountain-array/
+// https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+// https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+
+// Modified
+// https://leetcode.com/problems/search-in-rotated-sorted-array/
+// https://leetcode.com/problems/find-in-mountain-array/
+// https://leetcode.com/problems/single-element-in-a-sorted-array/
+// https://leetcode.com/problems/find-k-closest-elements/
+
+// Non-intuitive search space
+// https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/
+// https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/
+// https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/
+// https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+// https://leetcode.com/problems/koko-eating-bananas/
+
+// General
+// https://leetcode.com/problems/h-index-ii/
+// https://leetcode.com/problems/search-a-2d-matrix-ii/
+// https://leetcode.com/problems/russian-doll-envelopes/
+
+// Book Allocation
+// Split Array Largest Sum
+// Capacity to Ship Packages
+
+// Painter's Partition
+// Koko Eating Banana
+
+// Smallest Divisor Threshold
+
+// Aggressive Cows
+
+// Magnetic Force Between Balls
+// Woodcutting - Eko
+// Minimize Max Distance
+// Prata Spoj
+
+// Minimum Bouquets
+// Minimized Max Distance to Any Store
+// Minimum Speed to Arrive on Time
