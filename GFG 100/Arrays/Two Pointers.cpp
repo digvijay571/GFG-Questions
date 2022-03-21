@@ -370,23 +370,44 @@ int removeDuplicates(vector<int> &nums)
 }
 
 // Trapping Rain Water
+https://www.youtube.com/watch?v=PwEdhxQkFZs&t=696s
 //  https://leetcode.com/problems/trapping-rain-water/
-int trap(vector<int> &height)
+class Solution
 {
-    int n = height.size();
-    vector<int> left(n), right(n); // leftMax and RightMax
-    leftMax[0] = height[0];
-    for (int i = 1; i < n; i++)
-        left[i] = max(leftMax[i - 1], height[i]);
-
-    right[n - 1] = height[n - 1];
-    for (int i = n - 2; i >= 0; i--)
-        right[i] = max(right[i + 1], height[i]);
-
-    int trapWater = 0;
-    for (int i = 0; i < n; i++)
+public:
+    int trap(vector<int> &height)
     {
-        trapWater += min(left[i], right[i]) - height[i]; // This formula gives water stored in current height.
+        int n = height.size();
+
+        // remember to initalize with zero  not a[0] and a[n-1]
+        int lmax = 0;
+        int rmax = 0;
+        int ans = 0;
+
+        // remeber to start form 0 and n-1
+
+        int l = 0;
+        int r = n - 1;
+        while (l < r)
+        {
+            lmax = max(lmax, height[l]);
+            rmax = max(rmax, height[r]);
+
+            if (lmax < rmax)
+            {
+                ans += lmax - height[l];
+                l++;
+            }
+            else
+            {
+                ans += rmax - height[r];
+                r--;
+            }
+        }
+        return ans;
     }
-    return ans;
-}
+};
+
+
+
+//Seating Arrangement Two Pointers

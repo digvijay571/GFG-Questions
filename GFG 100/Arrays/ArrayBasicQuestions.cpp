@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-//Q.1Max or Min Element in Array
-//ALGO:Maximize max-element variable
-int maxElement(int arr[], int n) //we have to pass size with arr
-								 // as they are passed as pointers
+// Q.1Max or Min Element in Array
+// ALGO:Maximize max-element variable
+int maxElement(int arr[], int n) // we have to pass size with arr
+								 //  as they are passed as pointers
 {
 	int maxNum = arr[0];
 	for (int i = 1; i < n; i++)
 	{
-		maxNum = max(maxNum, arr[i]); //maximizing maxNum
+		maxNum = max(maxNum, arr[i]); // maximizing maxNum
 
-		//OR
+		// OR
 
 		if (maxNum < arr[i])
 		{
@@ -22,12 +22,12 @@ int maxElement(int arr[], int n) //we have to pass size with arr
 	return maxNum;
 }
 
-//Q. Find Second Largest Element
-//ALGO:
-// maintain two variables
-//largest and second largest
-//if current val is greater than currlargest then assingn it to largest and out largest become second largest
-//if current val is less than currlargest then if it is greater than second largest assing it to second largest
+// Q. Find Second Largest Element
+// ALGO:
+//  maintain two variables
+// largest and second largest
+// if current val is greater than currlargest then assingn it to largest and out largest become second largest
+// if current val is less than currlargest then if it is greater than second largest assing it to second largest
 int secondLargest(int arr[], int n)
 {
 	int largest = arr[0];
@@ -37,8 +37,8 @@ int secondLargest(int arr[], int n)
 	{
 		if (arr[i] > largest)
 		{
-			secondLargest = largest;//IMP : first this -> whenver u are putting one var value to another make sure it is not begin changed
-			largest = arr[i];	
+			secondLargest = largest; // IMP : first this -> whenver u are putting one var value to another make sure it is not begin changed
+			largest = arr[i];
 		}
 		else if (arr[i] > secondLargest)
 		{
@@ -48,6 +48,18 @@ int secondLargest(int arr[], int n)
 	return secondLargest;
 }
 
+// Generate all Subarrays
+
+// Idx Concept:(0..n-1)
+
+// i  and  j let two indexs of same array
+// j-i -> gives len excluding one of the end
+// j-i+1 // gives len including both the end
+// j-i-1 //gives len excluding both the end
+
+// Jump concept:
+// nums[nums[i]] -> jump to nums[i] idx
+// nums[i] -> jump to i idx and give its val
 int main()
 {
 }

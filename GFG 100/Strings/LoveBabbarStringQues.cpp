@@ -99,3 +99,31 @@ public:
         return cAS(n);
     }
 };
+
+//Count no. of permutions which can be obtained by exactly one swap.
+// https://practice.geeksforgeeks.org/problems/2ac2f925b836b0625d848a0539ffd3d2d2995f92/1#
+long long countStrings(string S)
+    {
+   
+        /* 
+        Formular for n distinct charater ( n * (n-1) )/ 2
+        */
+        long long res = (S.size() * (S.size() - 1))/2;
+        long long fmp[26] = {0};
+        for(char c : S)
+            fmp[c -'a']++;
+        int removed = false;
+        for(int i = 0; i< 26; i++)
+        {
+            if(fmp[i] > 1)
+            {   
+                //Remove the count of repeating strings 
+                res = res - (fmp[i] * (fmp[i] - 1))/2;
+                removed=true;
+            }
+        }
+        // +1 for the repeated strings 
+        return removed == false ? res : res+1;//as we have removed the original string in which all were in same order as original string
+      
+        
+    }

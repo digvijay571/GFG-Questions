@@ -12,3 +12,8 @@
 
 //Sorting also bring the elements close as possible
 //CHocolate Distribution
+
+
+//Two arrays closest diff ? sort
+
+//Two arrays same sort?

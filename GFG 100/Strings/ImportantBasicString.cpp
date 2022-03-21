@@ -2,29 +2,29 @@
 
 using namespace std;
 
-//Q1 Sort a string in O(N) time
+// Q1 Sort a string in O(N) time
 
-//Q2 Permutation of a string or Anagrams
+// Q2 Permutation of a string or Anagrams
 
-//Q3 Permutation in a string (+sliding window)
+// Q3 Permutation in a string (+sliding window)
 
-//Q4 Unique charaters present?
+// Q4 Unique charaters present?
 
-//Q5 Longest Unique character substring
+// Q5 Longest Unique character substring
 //->Follow Up it minimum window substring-using sliding window
 
-//Q6 Check String Rotation
+// Q6 Check String Rotation
 
-//Q7 String Compression
+// Q7 String Compression
 
-//Q8 Remove all occurences of String
+// Q8 Remove all occurences of String
 
-//Count Sort
+// Count Sort
 void sortString(string &s)
 {
     vector<int> fmp(26, 0);
 
-    //make frequency map of s
+    // make frequency map of s
     for (auto e : s)
         fmp[e - 'a']++;
 
@@ -32,7 +32,7 @@ void sortString(string &s)
 
     for (int i = 0; i < 26; i++)
     {
-        //replace one by one with the known frequncy in sorted order
+        // replace one by one with the known frequncy in sorted order
         while (fmp[i]--)
         {
             s[j++] = 'a' + i;
@@ -63,17 +63,17 @@ bool isAnagram(string s, string t)
 bool checkInclusion(string s1, string s2)
 {
 
-    //base case
+    // base case
     if (s1.size() > s2.size())
         return 0;
 
-    vector<int> fmp1(26, 0); //freqency map for s1
-    vector<int> fmp2(26, 0); //freqency map for s2
+    vector<int> fmp1(26, 0); // freqency map for s1
+    vector<int> fmp2(26, 0); // freqency map for s2
 
     for (auto e : s1)
         fmp1[e - 'a']++;
 
-    //for window of size s1 as we have to check  if s2 contains a permutation of s1
+    // for window of size s1 as we have to check  if s2 contains a permutation of s1
 
     for (int i = 0; i < s1.size(); i++)
         fmp2[s2[i] - 'a']++;
@@ -81,7 +81,7 @@ bool checkInclusion(string s1, string s2)
     if (fmp1 == fmp2)
         return 1;
 
-    //slide window
+    // slide window
     int j = s1.size();
     int prev = 0;
     while (j < s2.size())
@@ -99,7 +99,7 @@ bool checkInclusion(string s1, string s2)
 bool uniqueCharacters(string str)
 {
 
-    int checker = 0; //first 26 bit for a-z
+    int checker = 0; // first 26 bit for a-z
 
     for (int i = 0; i < str.length(); i++)
     {
@@ -126,25 +126,28 @@ bool uniqueCharacters(string str)
 int lengthOfLongestSubstring(string s)
 {
 
-    vector<int> lastSeen(256, -1); //Initializing with -1
+    vector<int> lastSeen(256, -1); // Initializing with -1
 
     int ans = 0;
 
-    int j = -1; //This is for Tracking last seen for all prev characters
+    int j = -1; // This is for Tracking last seen for all prev characters
 
     for (int i = 0; i < s.size(); i++)
-    {
-        j = max(j, lastSeen[s[i]]); //maximizing with Last seen for current character
+    { // when was this last character seen - lastSeen[s[i]]
+      // j is max of all the previously repeated charaters
+        j = max(j, lastSeen[s[i]]); // maximizing with Last seen for current character
+                                    // to get a window of non-repeating characters
+                                    // j+1 to i window is of non-repeating or not duplicate characters
 
-        ans = max(ans, i - j); //maximizing the length
+        ans = max(ans, i - j); // maximizing the length
 
-        lastSeen[s[i]] = i; //Updating last seen
+        lastSeen[s[i]] = i; // Updating last seen
     }
 
     return ans;
 }
 
-//https://leetcode.com/problems/rotate-string/
+// https://leetcode.com/problems/rotate-string/
 bool rotateString(string s, string goal)
 {
     if (s.size() != goal.size())
@@ -156,12 +159,12 @@ bool rotateString(string s, string goal)
     return 0;
 }
 
-//compression of String
-// https://leetcode.com/problems/string-compression/
+// compression of String
+//  https://leetcode.com/problems/string-compression/
 int compress(vector<char> &chars)
 {
 
-    //As the size always is same or reduces so we do not need to form string
+    // As the size always is same or reduces so we do not need to form string
 
     int i = 0;     // current index
     int index = 0; // solution index
@@ -176,9 +179,9 @@ int compress(vector<char> &chars)
 
         chars[index++] = current;
 
-        if (count > 1) //if count ==1 then we do not need its frequency appended given in ques
+        if (count > 1) // if count ==1 then we do not need its frequency appended given in ques
         {
-            for (char &ch : to_string(count)) //splitting number to character array
+            for (char &ch : to_string(count)) // splitting number to character array
                 chars[index++] = ch;
         }
     }

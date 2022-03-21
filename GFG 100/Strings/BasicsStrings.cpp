@@ -173,9 +173,98 @@ char findMaxOccuring(string s)
     return (char)(max_element(fmp.begin(), fmp.end()) - fmp.begin() + 'a'); //typeCasting because when we add they are converted in AsCii values
 }
 
+
+
+
+
+
+
+
+
+
+//Concept:Bit Marker  for each character
+https://practice.geeksforgeeks.org/problems/k-pangrams0909/1/
+bool kPangram(string str, int k)
+{
+
+    int mark=0;//25.....0
+               //z......a
+               
+               //   ith bit      1<<1;              1<<0;
+               // 1<<(c-'a');    1<<('b'-'a');      1<<('a'-'a');
+               //each bit has marking of existence of a 
+    int count=0;
+    for(auto c:str)
+    {
+        if(c==' '){ 
+        count++;
+        continue;
+        }
+        
+        mark = mark | (1 << (c-'a'));//if c is present mark using mark = mark | (1 << (c-'a');
+    }
+
+    if((str.size()- count)<26)return 0;
+    
+    count=0;
+    
+    //iterating through 26 bits
+    for(int i=1;i<=26;i++)
+    {
+        
+       count += !(mark&1)?1:0;//if not set is means not present in sring
+
+       mark=mark>>1;
+    }
+    
+   return  count<=k;
+}
+
+
+// Check Isogram... string which have unique charachters
+
+// BitMap:26 bits for each character
+
+class Solution
+{
+public:
+    // Function to check if a string is Isogram or not.
+    bool isIsogram(string s)
+    {
+        int marker = 0; // FFFFFFFFFFFFFF ->any character not found
+
+        for (auto c : s)
+        {
+            int bitidx = c - 'a';
+
+            int mask = (1 << bitidx);//2^i can also be used to make mask
+
+            int isset = marker & mask; // check if bit is alredy set
+                                       // already found the character
+            if (isset)
+            {
+                return false;
+            }
+            else
+            {
+                marker = marker | mask; // mark that it is found
+                                        // it is going to set the bit at that idx
+            }
+        }
+
+        return true;
+    }
+};
+
+
+//Index Map
+
 //Q.LeftMost Non-Repeating Character-Idea is to store the first ocurrence in frequecy map and if it appears again then mark it with -2  and then minimize the indexes >=0
 
 //Q.LeftMost Repeating Character-Idea is to store the first ocurrence index in frequecy map and if it appears again then skip it ( not -1) then minimize the indexes >=0
+
+
+//Ranking Based
 
 //Q.Lexiographic Rank:Idea to to find strings which are lexiographically smaller than current string and then add 1 to get rank of current string
 
@@ -197,14 +286,28 @@ char findMaxOccuring(string s)
 
 
 
+// The first cin>>a; reads a single word, skipping over any leading space characters,
+//  and stopping when it encounters a space character (which includes the end of the line).
 
 
+//cin.get()
+// The cin.get() after every initialization is there to "grab"
+//  the newline character that gets put in the stream every time you press enter.
+//   Say you start entering your values like this:
 
+// 2 
 
-//GetLine
+// a b c d...
+// Assuming you have pressed enter after 2, 
+// the newline character was also put on the stream.
+//  When you call cin.get() after that, it will grab and discard the newline character, 
+//  allowing the rest of your code to properly get the input.
 
+// cin.get ( char* s, streamsize n, char delim ); and cin.getline (char* s, streamsize n, char delim ); 
+// is almost the same thing. The first one doesn't discard delim from input stream however.
 
-
+// The third cin.get(a,256) reads a whole line but leaves the end-of-line character in the stream, 
+// so that repeating this will give no more input
 
 
 //StringStream

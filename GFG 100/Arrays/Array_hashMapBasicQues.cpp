@@ -18,14 +18,18 @@
 // mp.insert({key,val});
 
 // How to access?
-// mp[key]
+// mp[key] //key gets inserted
 
-// How to check if a key is Present?
-// mp.count(key);
+//find count begin end
+//erase size
 
-// mp.erase();
-// mp.size();
-// mp.clear();
+//How to iteratie?
+//for(auto e:map)
+// {
+    //e ->all the entries in map
+    //e.first ->key
+    //e.second->value
+// }
 
 // or correspondece can also be stored in hash map with unique key
 

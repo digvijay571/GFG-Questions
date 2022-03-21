@@ -1,5 +1,108 @@
 // Sorting+intervals
 
+
+//Groups are:
+//-->sorting based on start
+//Merege
+//Covered intervals  --> two pointers
+
+//Intersection   --> two pointers
+
+
+//sorting based on end
+
+//Remove Overalapping
+//Activity selection
+//Max chain lenth
+//Meeting room 1
+
+
+//Car pooling
+// Maximum value in an array after m range increment operations
+//Meeting room 2
+//Minimum Platform
+
+// https://leetcode.com/problems/car-pooling/
+
+bool carPooling(vector<vector<int>> & trips, int capacity) {
+         map<int, int> sortedmap;
+        for (int i = 0; i < trips.size(); ++i) {
+             sortedmap[trips[i][1]] += trips[i][0]; // picking up the passengers resulting in occupany in seats
+             sortedmap[trips[i][2]] -= trips[i][0]; //droping off the passengers resulting in reduction of filling seats
+        }
+        for (auto it = sortedmap.begin(); it != sortedmap.end();it++) { 
+            capacity -= it->second;
+            
+            if (capacity < 0) return false;
+        }
+        return true;
+    }
+    
+//Meeting room 2
+// https://www.lintcode.com/problem/919/
+    
+    int minMeetingRooms(vector<Interval> &trips) {
+
+        vector<int> arr,dep;
+        for(int i=0;i<trips.size();i++)
+        {
+            arr.push_back(trips[i].start);
+            dep.push_back(trips[i].end);
+        }
+        int n=arr.size();
+              int min=1;
+    int req=1;
+    int i=1,j=0;
+    sort(arr.begin(),arr.end());
+    sort(dep.begin(),dep.end());
+    while((i<=n-1)&&(j<=n-1)){
+        if(arr[i]>dep[j]){
+            min--;
+            j++;
+            req=max(min,req);
+        }
+        else if(arr[i]<dep[j]){
+            min++;
+            i++;
+            req=max(min,req);
+        }else
+        {
+            i++;
+            j++;
+        }
+         
+    }
+    return req;
+       
+    }
+//Minimum Platform
+
+    // https://practice.geeksforgeeks.org/problems/minimum-platforms-1587115620/1/
+   int findPlatform(int arr[], int dep[], int n)
+    {
+    int min=1;
+    int req=1;
+    int i=1,j=0;
+    sort(arr,arr+n);
+    sort(dep,dep+n);
+    while((i<=n-1)&&(j<=n-1)){
+        if(arr[i]>dep[j]){
+            min--;
+            j++;
+            req=max(min,req);
+        }
+        else if(arr[i]<=dep[j]){
+            min++;
+            i++;
+            req=max(min,req);
+        }
+         
+    }
+    return req;
+    }
+
+
+
 // https://leetcode.com/problems/merge-intervals/discuss/1398334/C%2B%2B-SIMPLE-with-EXPLANATION-Pattern-for-INTERVAL-problems
 // https://leetcode.com/problems/insert-interval/
 // Can Also be done using binary search
@@ -70,6 +173,70 @@ public:
             }
             else
             {
+                end = intervals[i][1];
+            }
+        }
+
+        return remove;
+    }
+};
+// https://leetcode.com/problems/maximum-length-of-pair-chain/submissions/
+// https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
+// Or LIS
+// Or greedy
+
+class Solution
+{
+public:
+    int findLongestChain(vector<vector<int>> &intervals)
+    {
+        sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b)
+             { return a[0] < b[0]; });
+
+        int end = intervals[0][1];
+
+        int remove = 0;
+
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (intervals[i][0] <= end)
+            {
+                remove++;
+
+                end = min(end, intervals[i][1]);
+            }
+            else
+            {
+                end = intervals[i][1];
+            }
+        }
+
+        return intervals.size() - remove;
+    }
+};
+
+// Sorting+greedy
+
+class Solution
+{
+public:
+    int findMinArrowShots(vector<vector<int>> &intervals)
+    {
+
+        // sorting based on ending of intervals
+        sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b)
+             { return a[1] < b[1]; });
+
+        int end = intervals[0][1];
+
+        int remove = 1;
+
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (intervals[i][0] > end) // if curr interval has started after ending of prev then prev interval is non-overlapping
+            {
+                remove++;
+
                 end = intervals[i][1];
             }
         }
@@ -209,88 +376,87 @@ public:
 
 // DP+Greedy+Intervals:https://www.youtube.com/watch?v=Pk128gC_sdw
 
-
-//interval+covering some time or area with minimum intervals
+// interval+covering some time or area with minimum intervals
 
 //  https://leetcode.com/problems/video-stitching/
 // https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/
 
-
-class Solution {
+class Solution
+{
 public:
-    int videoStitching(vector<vector<int>>& clips, int time) {
-        
-        //for each of clips
-        //we try to get maximum end if it has started somewhere before and ended after curr min
-        
-        //if mini==maxi then return -1
-        
-        //make mini = maxi ,count++
-        
-        //repeat this untill maxi<time
-        
-        int mini=0;
-        int maxi=0;
-        int count=0;
-        while(maxi<time)
+    int videoStitching(vector<vector<int>> &clips, int time)
+    {
+
+        // for each of clips
+        // we try to get maximum end if it has started somewhere before and ended after curr min
+
+        // if mini==maxi then return -1
+
+        // make mini = maxi ,count++
+
+        // repeat this untill maxi<time
+
+        int mini = 0;
+        int maxi = 0;
+        int count = 0;
+        while (maxi < time)
         {
-            for(int i=0;i<clips.size();i++)
+            for (int i = 0; i < clips.size(); i++)
             {
-                if(clips[i][0]<=mini && clips[i][1]>maxi)
+                if (clips[i][0] <= mini && clips[i][1] > maxi)
                 {
-                    maxi = max(maxi,clips[i][1]);
+                    maxi = max(maxi, clips[i][1]);
                 }
             }
-             //Upar ke scanning  mei AGAR KOI RANGE MILA HOGA TO MAX!=MIN HOGA
-		     //Else ESSE AAGE NHI BADH PA RAHE HAI
-            if(maxi==mini)
+            // Upar ke scanning  mei AGAR KOI RANGE MILA HOGA TO MAX!=MIN HOGA
+            // Else ESSE AAGE NHI BADH PA RAHE HAI
+            if (maxi == mini)
                 return -1;
-            
-            mini=maxi;
+
+            mini = maxi;
             count++;
         }
-        
+
         return count;
     }
 };
 
+// Change is we have to form itervals intead of iterating through intervals
 
-//Change is we have to form itervals intead of iterating through intervals 
-
-class Solution {
+class Solution
+{
 public:
-    int minTaps(int n, vector<int>& ranges) {
+    int minTaps(int n, vector<int> &ranges)
+    {
 
-        
-        //for each of clips
-        //we try to get maximum end if it has started somewhere before and ended after curr min
-        
-        //if mini==maxi then return -1
-        
-        //make mini = maxi ,count++
-        
-        //repeat this untill maxi<time
-        
-        int mini=0;
-        int maxi=0;
-        int count=0;
-        while(maxi<n)
+        // for each of clips
+        // we try to get maximum end if it has started somewhere before and ended after curr min
+
+        // if mini==maxi then return -1
+
+        // make mini = maxi ,count++
+
+        // repeat this untill maxi<time
+
+        int mini = 0;
+        int maxi = 0;
+        int count = 0;
+        while (maxi < n)
         {
-            for(int i=0;i<ranges.size();i++)
+            for (int i = 0; i < ranges.size(); i++)
             {
-                if((i-ranges[i])<=mini && (i+ranges[i])>maxi)
+                if ((i - ranges[i]) <= mini && (i + ranges[i]) > maxi)
                 {
-                    maxi = max(maxi,i+ranges[i]);
+                    maxi = max(maxi, i + ranges[i]);
                 }
             }
-            if(maxi==mini)
+            if (maxi == mini)
                 return -1;
-            
-            mini=maxi;
+
+            mini = maxi;
             count++;
         }
-        
-        return count;
 
+        return count;
     }
 };

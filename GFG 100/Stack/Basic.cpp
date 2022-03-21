@@ -36,3 +36,9 @@ Postorder Tree Traversal
 //we get elements in same order in which it is inserted.
 //eg if we push 1,2,3,4 we will get 1,2,3,4 
 //push,pop,top,empty,size
+
+
+//Some time i forget to push or pop elements or check if stack is empty and access top directly
+
+//Value stack
+//Index stack

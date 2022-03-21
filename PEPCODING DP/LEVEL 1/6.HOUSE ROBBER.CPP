@@ -1,3 +1,5 @@
+//--X R X---
+
 // HOUSE ROBBER
 //  https://leetcode.com/problems/house-robber/
 // Maximum sum such that no two elements are adjacent
@@ -67,3 +69,9 @@ int maxCoins(vector<int> &coins, int n)
 // https://www.geeksforgeeks.org/find-minimum-sum-one-every-three-consecutive-elements-taken/
 // Let sum(i) be the minimum possible sum when arr[i] is part of a solution sum (not necessarily result) and is last picked element.
 // Then our result is minimum of sum(n-1), sum(n-2) and sum(n-3) [We must pick at least one of the last three elements].
+
+// https://leetcode.com/tag/dynamic-programming/discuss/1612553/Microsoft-or-Onsite-or-Hyd-or-L64-Generalized-House-Robber
+
+// Another Extension:
+// Q. Delete and Earn
+//  https://leetcode.com/problems/delete-and-earn/discuss/1822463/JAVA-SOLUTION-oror-RECURSION-to-DP-to-SPACE-OPTIMISATION

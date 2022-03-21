@@ -14,3 +14,20 @@ int doOverlap(int L1[], int R1[], int L2[], int R2[]) {
         
          return 1;
     }
+
+
+
+//Can Make A Triange
+
+
+
+
+
+
+//Missing Point of Parallelogram
+
+
+
+
+
+//Points on Straight Line
