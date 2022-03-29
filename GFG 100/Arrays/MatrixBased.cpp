@@ -1,14 +1,14 @@
 
 
 // Second loop mei galti ho jate hai kabhi kabhi
-// j=0 se start kar deta hu agr duplicates nahi hai to i+1 se start hoga
+// j=0 se start kar deta hu agr same index nahi le sakte hai to i+1 se start hoga
 
 // https://practice.geeksforgeeks.org/problems/addition-of-two-square-matrices4916/1
 // Subtraction
 
 // Multiply Two Matrix
 
-// as we want sum of product of ith row and jth col  - n  elements for eij
+// eij -as we want sum of product of ith row elements and jth col elements
 
 // k->0 to n-1
 // a[i][k] ->ith row

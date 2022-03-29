@@ -1,31 +1,63 @@
-#include<bits/stdc++.h>
+#include<stdio.h>
 
 using namespace std;
 
 
-vector<pair<int,int>>  moves={{1,1},{-1,-1},{1,-1},{-1,1}};
 
-int dfs(int i,int j,int ic,int jc)//i
-{
-    if(i<0||j<0||i>=8||j>=8)
-    return 0;
-	
-	cout<<i<<j<<endl;
-    return (1+dfs(i+ic,j+jc,ic,jc));
-}
 int main()
 {
-	int A, B;
-    cin>>A>>B;
-	--A,--B;
-    int count=0;
+   int n;scanf("%d",&n);
 
-    for(auto move:moves)
-    {
-       // cout<<dfs(A,B,move.first,move.second)<<endl;
-    	cout<<"call1"<<" ";
-       count+= dfs(A,B,move.first,move.second);
-    }
-    cout<<" "<<count<<endl;
-    return count-3;
+   int arr[n];
+
+   int oddLen=0,evenLen=0;
+   for(int i=0;i<n;i++){
+       scanf("%d",&arr[i]);
+       if(arr[i]%2==0)
+       {
+           evenLen++;
+       }
+       else
+       {
+          oddLen++;
+       }
+   }
+
+   int oddArr[oddLen],evenArr[evenLen];
+   int j=0,k=0;
+   for(int i=0;i<n;i++)
+   {
+       if(arr[i]%2==0)
+       {
+           evenArr[j++]=arr[i];
+       }
+       else
+       {
+           oddArr[k++]=arr[i];
+       }
+   }
+   
+   printf(" Original array is ");
+   for(int i=0;i<n;i++)
+   {
+       printf("%d",arr[i]);
+       if(i!=n-1)
+       printf(",");
+   }
+
+   printf(" Odd array is ");
+   for(int i=0;i<oddLen;i++)
+   {
+       printf("%d",oddArr[i]);
+      if(i!=oddLen-1)
+       printf(",");
+   }
+
+   printf(" Even array is ");
+   for(int i=0;i<evenLen;i++)
+   {
+       printf("%d",evenArr[i]);
+       if(i!=evenLen-1)
+       printf(",");
+   }
 }

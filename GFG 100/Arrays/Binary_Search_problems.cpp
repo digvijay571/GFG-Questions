@@ -90,3 +90,22 @@
 // Minimum Bouquets
 // Minimized Max Distance to Any Store
 // Minimum Speed to Arrive on Time
+
+
+
+Find frequency of an element in a sorted array. (Same as First and Last Position of Element in Sorted Array)
+https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+Number of times a sorted array is rotated (Circularly sorted array)
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+Search in a circularly sorted array.
+https://leetcode.com/problems/search-in-rotated-sorted-array/
+Find row with maximum ones in a matrix sorted by rows.
+https://www.tutorialcup.com/array/row-maximum-number-1s.htm
+Find an element in a matrix sorted by rows.
+https://leetcode.com/problems/search-a-2d-matrix/
+Egg dropping puzzle.
+https://leetcode.com/problems/super-egg-drop/
+Kth Smallest Element in a sorted matrix.
+https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
+Distribute n candies among k people.
+https://leetcode.com/problems/distribute-candies-to-people/
